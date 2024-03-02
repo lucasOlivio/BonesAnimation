@@ -1,0 +1,1387 @@
+[
+    {
+        "gridBroadphase": {
+            "lengthPerBox": [
+                5.0,
+                5.0,
+                5.0
+            ]
+        }
+    },
+    {
+        "camera": {
+            "upVector": [
+                0.0,
+                1.0,
+                0.0
+            ],
+            "distance": 0.10000000149011612,
+            "height": 0.0,
+            "offsetTarget": 0.0,
+            "fovy": 0.6000000238418579,
+            "zNear": 1.0,
+            "zFar": 20000.0
+        },
+        "tag": {
+            "name": "Camera"
+        },
+        "transform": {
+            "position": [
+                317.1765441894531,
+                440.4646911621094,
+                -746.2341918945313
+            ],
+            "orientation": [
+                -0.19305284321308136,
+                0.03343735635280609,
+                -0.9662325978279114,
+                -0.1673535853624344
+            ],
+            "scale": 1.0
+        },
+        "player": {
+            "speed": 50.0
+        }
+    },
+    {
+        "tag": {
+            "name": "directionallight"
+        },
+        "transform": {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "orientation": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": 0.0
+        },
+        "light": {
+            "distanceOffset": 0.0,
+            "atten": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "diffuse": [
+                0.8999999761581421,
+                0.8999999761581421,
+                0.8999999761581421,
+                1.0
+            ],
+            "direction": [
+                1.0,
+                -1.0,
+                0.0,
+                1.0
+            ],
+            "directionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "positionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "params": [
+                2.0,
+                1.0,
+                1.0,
+                0.0
+            ],
+            "specular": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "status": 1
+        }
+    },
+    {
+        "tag": {
+            "name": "matskybox"
+        },
+        "texture": {
+            "fileName": "textcube",
+            "textureType": 20,
+            "vecTextures": [
+                "cubetexture/TropicalSunnyDayLeft2048.bmp",
+                "cubetexture/TropicalSunnyDayRight2048.bmp",
+                "cubetexture/TropicalSunnyDayDown2048.bmp",
+                "cubetexture/TropicalSunnyDayUp2048.bmp",
+                "cubetexture/TropicalSunnyDayFront2048.bmp",
+                "cubetexture/TropicalSunnyDayBack2048.bmp"
+            ]
+        },
+        "material": {
+            "name": "matcubetext",
+            "alphaTexture": "",
+            "colorTextures": [],
+            "colorTexturesRatios": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "cubeTexture": "textcube",
+            "offset": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "currOffset": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "offsetHeightMap": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "currOffsetHeightMap": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "offsetMove": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "discardTexture": "",
+            "heightMapTexture": "",
+            "heightScale": 0.0,
+            "isEmissive": 0,
+            "normalTexture": "",
+            "specularTexture": "",
+            "useAlphaTexture": 0,
+            "useCubeTexture": 1,
+            "useDiscardTexture": 0,
+            "useHeightMap": 0,
+            "useNormalTexture": 0,
+            "useSpecularTexture": 0
+        }
+    },
+    {
+        "tag": {
+            "name": "matcharacters"
+        },
+        "texture": {
+            "fileName": "characters1.bmp",
+            "textureType": 0,
+            "vecTextures": []
+        },
+        "material": {
+            "name": "matcharacters",
+            "alphaTexture": "",
+            "colorTextures": [
+                "characters1.bmp"
+            ],
+            "colorTexturesRatios": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "cubeTexture": "",
+            "offset": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "currOffset": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "offsetHeightMap": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "currOffsetHeightMap": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "offsetMove": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "discardTexture": "",
+            "heightMapTexture": "",
+            "heightScale": 0.0,
+            "isEmissive": 0,
+            "normalTexture": "",
+            "specularTexture": "",
+            "useAlphaTexture": 0,
+            "useCubeTexture": 0,
+            "useDiscardTexture": 0,
+            "useHeightMap": 0,
+            "useNormalTexture": 0,
+            "useSpecularTexture": 0
+        }
+    },
+    {
+        "tag": {
+            "name": "skybox"
+        },
+        "transform": {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "orientation": [
+                1.0,
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "scale": 10000.0
+        },
+        "model": {
+            "isActive": 1,
+            "doNotLight": 0,
+            "isWireframe": 0,
+            "isDynamic": 0,
+            "useDefaultColor": 0,
+            "useTransparency": 0,
+            "defaultColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "useColorTexture": 1,
+            "material": "matcubetext",
+            "models": [
+                "skybox.ply"
+            ],
+            "FBOIDs": [
+                0
+            ]
+        }
+    },
+    {
+        "tag": {
+            "name": "character"
+        },
+        "transform": {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "orientation": [
+                1.0,
+                0.0,
+                -0.0,
+                0.0
+            ],
+            "scale": 100.0
+        },
+        "model": {
+            "isActive": 1,
+            "doNotLight": 0,
+            "isWireframe": 0,
+            "isDynamic": 0,
+            "useDefaultColor": 0,
+            "useTransparency": 0,
+            "defaultColor": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "useColorTexture": 1,
+            "material": "matcharacters",
+            "models": [
+                "firefighter.fbx"
+            ],
+            "FBOIDs": [
+                0
+            ]
+        },
+        "nodeAnimation": {
+            "isActive": true,
+            "animActive": 0,
+            "animations": [
+                {
+                    "ticksPerSecond": 16.0,
+                    "duration": 1.0,
+                    "isLoop": 1,
+                    "channels": [
+                        {
+                            "name": "RootNode",
+                            "positionKeyFrames": [
+                                {
+                                    "time": -0.0,
+                                    "easeType": 0,
+                                    "isKeyEvent": false,
+                                    "value": [
+                                        0.0,
+                                        0.0,
+                                        0.0
+                                    ]
+                                }
+                            ],
+                            "scaleKeyFrames": [
+                                {
+                                    "time": 0.0,
+                                    "easeType": 0,
+                                    "isKeyEvent": false,
+                                    "value": 1.0
+                                }
+                            ],
+                            "rotationKeyFrames": [
+                                {
+                                    "time": 0.0,
+                                    "easeType": 0,
+                                    "isKeyEvent": false,
+                                    "value": [
+                                        1.0,
+                                        0.0,
+                                        0.0,
+                                        0.0
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "unamed",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Hips",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Spine_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Spine_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Spine",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Spine1",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Spine2",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Neck_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Neck_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Neck",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:Head",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:HeadTop_End",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftShoulder_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftShoulder_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftShoulder",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftArm_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftArm_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftArm",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftForeArm_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftForeArm_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftForeArm",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHand_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHand_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHand",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb1_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb1_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb1",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb2_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb2_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb2",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb3_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb3_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb3",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandThumb4",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex1_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex1_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex1",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex2_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex2_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex2",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex3_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex3_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex3",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandIndex4",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle1_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle1_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle1",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle2_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle2_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle2",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle3_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle3_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle3",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftHandMiddle4",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightShoulder_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightShoulder_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightShoulder",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightArm_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightArm_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightArm",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightForeArm_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightForeArm_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightForeArm",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHand_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHand_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHand",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb1_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb1_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb1",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb2_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb2_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb2",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb3_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb3_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb3",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandThumb4",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex1_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex1_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex1",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex2_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex2_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex2",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex3_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex3_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex3",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandIndex4",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle1_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle1_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle1",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle2_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle2_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle2",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle3_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle3_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle3",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightHandMiddle4",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftUpLeg_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftUpLeg_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftUpLeg",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftLeg_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftLeg_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftLeg",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftFoot_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftFoot_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftFoot",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftToeBase_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftToeBase_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftToeBase",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:LeftToe_End",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightUpLeg_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightUpLeg_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightUpLeg",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightLeg_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightLeg_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightLeg",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightFoot_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightFoot_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightFoot",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightToeBase_$AssimpFbx$_Translation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightToeBase_$AssimpFbx$_PreRotation",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightToeBase",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        },
+                        {
+                            "name": "mixamorig:RightToe_End",
+                            "positionKeyFrames": [],
+                            "scaleKeyFrames": [],
+                            "rotationKeyFrames": []
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "tag": {
+            "name": "directionallight"
+        },
+        "transform": {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "orientation": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": 0.0
+        },
+        "light": {
+            "distanceOffset": 0.0,
+            "atten": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "diffuse": [
+                0.4000000059604645,
+                0.4000000059604645,
+                0.4000000059604645,
+                1.0
+            ],
+            "direction": [
+                -1.0,
+                1.0,
+                0.0,
+                1.0
+            ],
+            "directionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "positionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "params": [
+                2.0,
+                1.0,
+                1.0,
+                0.0
+            ],
+            "specular": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "status": 1
+        }
+    },
+    {
+        "tag": {
+            "name": "ground"
+        },
+        "transform": {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "orientation": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": 1000.0
+        },
+        "texture": {
+            "fileName": "ground.bmp",
+            "textureType": 0,
+            "vecTextures": []
+        },
+        "material": {
+            "name": "matground",
+            "alphaTexture": "",
+            "colorTextures": [
+                "ground.bmp"
+            ],
+            "colorTexturesRatios": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "cubeTexture": "",
+            "offset": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "currOffset": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "offsetHeightMap": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "currOffsetHeightMap": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "offsetMove": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "discardTexture": "",
+            "heightMapTexture": "",
+            "heightScale": 0.0,
+            "isEmissive": 0,
+            "normalTexture": "",
+            "specularTexture": "",
+            "useAlphaTexture": 0,
+            "useCubeTexture": 0,
+            "useDiscardTexture": 0,
+            "useHeightMap": 0,
+            "useNormalTexture": 0,
+            "useSpecularTexture": 0
+        },
+        "model": {
+            "isActive": 1,
+            "doNotLight": 0,
+            "isWireframe": 0,
+            "isDynamic": 0,
+            "useDefaultColor": 0,
+            "useTransparency": 0,
+            "defaultColor": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "useColorTexture": 1,
+            "material": "matground",
+            "models": [
+                "flat.obj"
+            ],
+            "FBOIDs": [
+                0
+            ]
+        }
+    },
+    {
+        "tag": {
+            "name": "directionallight"
+        },
+        "transform": {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "orientation": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": 0.0
+        },
+        "light": {
+            "distanceOffset": 0.0,
+            "atten": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "diffuse": [
+                0.699999988079071,
+                0.699999988079071,
+                0.699999988079071,
+                1.0
+            ],
+            "direction": [
+                -1.0,
+                1.0,
+                0.0,
+                1.0
+            ],
+            "directionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "positionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "params": [
+                2.0,
+                1.0,
+                1.0,
+                0.0
+            ],
+            "specular": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "status": 1
+        }
+    },
+    {
+        "tag": {
+            "name": "directionallight"
+        },
+        "transform": {
+            "position": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "orientation": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "scale": 0.0
+        },
+        "light": {
+            "distanceOffset": 0.0,
+            "atten": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "diffuse": [
+                0.699999988079071,
+                0.699999988079071,
+                0.699999988079071,
+                1.0
+            ],
+            "direction": [
+                -1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "directionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "positionOffset": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "params": [
+                2.0,
+                1.0,
+                1.0,
+                0.0
+            ],
+            "specular": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "status": 1
+        }
+    }
+]
