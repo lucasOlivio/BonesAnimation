@@ -25,17 +25,17 @@ namespace MyEngine
         matModelOut = matModelOut * matRotation;
     }
 
-    void TransformUtils::ApplyScale(const float& scale, glm::mat4& matModelOut)
+    void TransformUtils::ApplyScale(const glm::vec3& scale, glm::mat4& matModelOut)
     {
         // Scaling matrix
-        glm::mat4 matScale = glm::scale(glm::mat4(1.0f), glm::vec3(scale));
+        glm::mat4 matScale = glm::scale(glm::mat4(1.0f), scale);
 
         matModelOut = matModelOut * matScale;
     }
 
     void TransformUtils::GetTransform(const glm::vec3& position,
                                       const glm::quat& orientation,
-                                      const float& scale, 
+                                      const glm::vec3& scale,
                                       glm::mat4& matModelOut)
     {
         // Combine all the transformations
@@ -47,7 +47,7 @@ namespace MyEngine
     }
 
     void TransformUtils::GetTransform(const glm::vec3& position, 
-                                      const float& scale, 
+                                      const glm::vec3& scale,
                                       glm::mat4& matModelOut)
     {
         // Transformation without rotation
@@ -93,7 +93,7 @@ namespace MyEngine
 
     glm::vec3 TransformUtils::LocalToWorldPoint(const glm::vec3& point,
                                                 const glm::vec3& position, const glm::quat& orientation,
-                                                const float& scale, 
+                                                const glm::vec3& scale,
                                                 glm::mat4& parentMat)
     {
         GetTransform(position, orientation, scale, parentMat);
@@ -104,7 +104,7 @@ namespace MyEngine
     }
 
     glm::vec3 TransformUtils::LocalToWorldPoint(const glm::vec3& point,
-										        const glm::vec3& position, const float& scale,
+										        const glm::vec3& position, const glm::vec3& scale,
                                                 glm::mat4& parentMat)
     {
         GetTransform(position, scale, parentMat);
@@ -114,7 +114,7 @@ namespace MyEngine
         return worldPoint;
     }
 
-    glm::vec3 TransformUtils::WorldToLocalPoint(const glm::vec3& point, const glm::vec3& position, const glm::quat& orientation, const float& scale, glm::mat4& parentMat)
+    glm::vec3 TransformUtils::WorldToLocalPoint(const glm::vec3& point, const glm::vec3& position, const glm::quat& orientation, const glm::vec3& scale, glm::mat4& parentMat)
     {
         GetTransform(position, orientation, scale, parentMat);
 
@@ -124,7 +124,7 @@ namespace MyEngine
         return localPoint;
     }
 
-    glm::vec3 TransformUtils::WorldToLocalPoint(const glm::vec3& point, const glm::vec3& position, const float& scale, glm::mat4& parentMat)
+    glm::vec3 TransformUtils::WorldToLocalPoint(const glm::vec3& point, const glm::vec3& position, const glm::vec3& scale, glm::mat4& parentMat)
     {
         GetTransform(position, scale, parentMat);
 

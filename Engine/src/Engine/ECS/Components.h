@@ -42,12 +42,12 @@ namespace MyEngine
 	{
 		glm::vec3 position;
 		glm::quat orientation;
-		float scale;
+		glm::vec3 scale;
 
 		// Values calculated in relation to parent
 		glm::vec3 worldPosition;
 		glm::quat worldOrientation;
-		float worldScale;
+		glm::vec3 worldScale;
 
 		// Value calculated distance in relation to camera position
 		float distToCamera;
@@ -186,16 +186,6 @@ namespace MyEngine
 		int currEndScaKF = -1;
 
 		float time;
-		bool isActive;
-	};
-
-
-	struct NodeAnimationComponent
-	{
-		std::vector<AnimationsInfo> animations;
-
-		int animActive; // Animation currently active
-
 		bool isActive;
 	};
 

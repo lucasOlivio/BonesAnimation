@@ -12,7 +12,7 @@
 #include "Engine/Graphics/ModelRenderSystem.h"
 #include "Engine/Graphics/Renderer/RenderSystem.h"
 #include "Engine/Graphics/Animations/TransformAnimationSystem.h"
-#include "Engine/Graphics/Animations/NodeAnimationSystem.h"
+#include "Engine/Graphics/Animations/MeshAnimationSystem.h"
 #include "Engine/Graphics/Animations/AnimationPlayerSystem.h"
 #include "Engine/Graphics/Lights/LightSystem.h"
 #include "Engine/Graphics/Lights/LightFlickerSystem.h"
@@ -63,7 +63,7 @@ namespace MyEngine
         {"LightFlickerSystem", []() { return new LightFlickerSystem; }},
         {"MaterialOffsetSystem", []() { return new MaterialOffsetSystem; }},
         {"TransformAnimationSystem", []() { return new TransformAnimationSystem; }},
-        {"NodeAnimationSystem", []() { return new NodeAnimationSystem; }},
+        {"MeshAnimationSystem", []() { return new MeshAnimationSystem; }},
         {"AnimationPlayerSystem", []() { return new AnimationPlayerSystem; }},
         {"ParticleEmissionSystem", []() { return new ParticleEmissionSystem; }},
         {"ParticleUpdaterSystem", []() { return new ParticleUpdaterSystem; }},

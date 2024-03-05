@@ -64,6 +64,12 @@ namespace MyEngine
             renderInfo.useColorTexture = pModel->useColorTexture;
             renderInfo.useDebugColor = false;
 
+            if (pMesh->bonesInfo.size() > 0)
+            {
+                renderInfo.useBones = true;
+                renderInfo.bonesInfos = pMesh->bonesInfo;
+            }
+
             if (pFrameBufferView)
             {
                 renderInfo.isFBOView = true;

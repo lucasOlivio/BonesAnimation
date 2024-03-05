@@ -26,6 +26,26 @@ namespace MyEngine
 		g[3][0] = a.a4; g[3][1] = a.b4; g[3][2] = a.c4; g[3][3] = a.d4;
 	}
 
+	void AssimpToGLM(const aiVector3D& a, glm::vec3& g)
+	{
+		g[0] = a.x;
+		g[1] = a.y;
+		g[2] = a.z;
+	}
+
+	void AssimpToGLM(const aiQuaternion& a, glm::quat& g)
+	{
+		g[0] = a.w;
+		g[1] = a.x;
+		g[2] = a.y;
+		g[3] = a.z;
+	}
+
+	void AssimpToGLM(const aiVector3D& a, float& g)
+	{
+		g = a.x;
+	}
+
 	cFileLoader_Imp::cFileLoader_Imp()
 	{
 
@@ -39,17 +59,27 @@ namespace MyEngine
 	Node* cFileLoader_Imp::m_CreateAnimNode(aiNode* node)
 	{
 		Node* newNode = new Node(node->mName.C_Str());
+
+		aiVector3D position;
+		aiQuaternion rotation;
+		aiVector3D scaling;
+		node->mTransformation.Decompose(scaling, rotation, position);
+
 		AssimpToGLM(node->mTransformation, newNode->transformation);
+
 		return newNode;
 	}
 
 	Node* cFileLoader_Imp::m_GenerateBoneHierarchy(aiNode* assimpNode, sMesh* drawInfo, const int depth)
 	{
 		Node* node = m_CreateAnimNode(assimpNode);
+		node->id = static_cast<int>(drawInfo->vecNodes.size());
 
-		for (int i = 0; i < assimpNode->mNumChildren; ++i)
+		drawInfo->vecNodes.push_back(node);
+
+		for (uint i = 0; i < assimpNode->mNumChildren; ++i)
 		{
-			node->children.emplace_back(m_GenerateBoneHierarchy(assimpNode->mChildren[i], drawInfo, depth + 1));
+			node->children.push_back(m_GenerateBoneHierarchy(assimpNode->mChildren[i], drawInfo, depth + 1));
 		}
 
 		return node;
@@ -58,7 +88,7 @@ namespace MyEngine
 	bool cFileLoader_Imp::m_ProcessScene(const aiScene* scene, sMesh* drawInfo)
 	{
 		// TODO: Validation of meshes and diferent objects loading
-		for (unsigned int index = 0; index < scene->mNumMeshes; index++)
+		for (uint index = 0; index < scene->mNumMeshes; index++)
 		{
 			aiMesh* currMesh = scene->mMeshes[index];
 
@@ -72,7 +102,7 @@ namespace MyEngine
 		// Load the vertices in the opengl structure VBO
 		drawInfo->pVertices = new sVertex[drawInfo->numberOfVertices];
 		// Load the indices for the Index Buffer
-		drawInfo->pIndices = new unsigned int[drawInfo->numberOfIndices];
+		drawInfo->pIndices = new uint[drawInfo->numberOfIndices];
 
 		float minX = FLT_MAX;
 		float minY = minX;
@@ -80,14 +110,14 @@ namespace MyEngine
 		float maxX = FLT_MIN;
 		float maxY = maxX;
 		float maxZ = maxX;
-		for (unsigned int index = 0; index < scene->mNumMeshes; index++)
+		for (uint index = 0; index < scene->mNumMeshes; index++)
 		{
 			aiMesh* currMesh = scene->mMeshes[index];
 
 			// Load the vertices in the opengl structure VBO
-			for (unsigned int currMeshIndex = 0; currMeshIndex < drawInfo->numberOfVertices; currMeshIndex++)
+			for (uint currMeshIndex = 0; currMeshIndex < drawInfo->numberOfVertices; currMeshIndex++)
 			{
-				unsigned int vboIndex = currMeshIndex + (index * currMeshIndex); // Allocate all in sequence in the array
+				uint vboIndex = currMeshIndex + (index * currMeshIndex); // Allocate all in sequence in the array
 				drawInfo->pVertices[vboIndex].x = currMesh->mVertices[vboIndex].x;
 				drawInfo->pVertices[vboIndex].y = currMesh->mVertices[vboIndex].y;
 				drawInfo->pVertices[vboIndex].z = currMesh->mVertices[vboIndex].z;
@@ -148,12 +178,12 @@ namespace MyEngine
 
 			// Load the indices for the Index Buffer
 			// TODO: Load different indices numbers based on shape (For now we just will use triangles)
-			for (unsigned int currTriangleIndex = 0;
+			for (uint currTriangleIndex = 0;
 				currTriangleIndex < drawInfo->numberOfTriangles;
 				currTriangleIndex++)
 			{
 				// Jump every 3 vertex index
-				unsigned int indicesIndex = currTriangleIndex * 3;
+				uint indicesIndex = currTriangleIndex * 3;
 
 				int v1 = currMesh->mFaces[currTriangleIndex].mIndices[0];
 				int v2 = currMesh->mFaces[currTriangleIndex].mIndices[1];
@@ -178,28 +208,93 @@ namespace MyEngine
 					drawInfo->pVertices[v3].z);
 			}
 
-
-			// Loading the vertices bones
-			drawInfo->rootNode = m_GenerateBoneHierarchy(scene->mRootNode, drawInfo);
 			if (!currMesh->HasBones())
 			{
 				continue;
 			}
 
-			unsigned int numBones = currMesh->mNumBones;
+			if (scene->mNumAnimations > 0)
+			{
+				MeshAnimations* pMeshAnimations = new MeshAnimations();
+				pMeshAnimations->isActive = true;
+				pMeshAnimations->animActive = 0;
+				pMeshAnimations->animations.resize(scene->mNumAnimations);
+
+				for (uint i = 0; i < scene->mNumAnimations; i++)
+				{
+					AnimationInfo animInfo = AnimationInfo();
+					aiAnimation* animation = scene->mAnimations[i];
+
+					animInfo.name = animation->mName.C_Str();
+					animInfo.duration = static_cast<float>(animation->mDuration);
+					animInfo.ticksPerSecond = static_cast<float>(animation->mTicksPerSecond);
+
+					for (uint j = 0; j < animation->mNumChannels; ++j)
+					{
+						aiNodeAnim* assimpNodeAnim = animation->mChannels[j];
+						NodeAnimationInfo nodeAnimInfo = NodeAnimationInfo();
+						nodeAnimInfo.name = assimpNodeAnim->mNodeName.C_Str();
+
+						nodeAnimInfo.positionKeyFrames.resize(assimpNodeAnim->mNumPositionKeys);
+						for (uint k = 0; k < assimpNodeAnim->mNumPositionKeys; ++k)
+						{
+							aiVectorKey& p = assimpNodeAnim->mPositionKeys[k];
+							PositionKeyFrame posKF = PositionKeyFrame();
+							posKF.time = static_cast<float>(p.mTime);
+							posKF.value = glm::vec3(p.mValue.x, p.mValue.y, p.mValue.z);
+							nodeAnimInfo.positionKeyFrames[k] = posKF;
+						}
+
+						nodeAnimInfo.scaleKeyFrames.resize(assimpNodeAnim->mNumScalingKeys);
+						for (uint k = 0; k < assimpNodeAnim->mNumScalingKeys; ++k)
+						{
+							aiVectorKey& s = assimpNodeAnim->mScalingKeys[k];
+							ScaleKeyFrame scaKF = ScaleKeyFrame();
+							scaKF.time = static_cast<float>(s.mTime);
+							scaKF.value = glm::vec3(s.mValue.x, s.mValue.y, s.mValue.z);
+							nodeAnimInfo.scaleKeyFrames[k] = scaKF;
+						}
+
+						nodeAnimInfo.rotationKeyFrames.resize(assimpNodeAnim->mNumRotationKeys);
+						for (uint k = 0; k < assimpNodeAnim->mNumRotationKeys; ++k)
+						{
+							aiQuatKey& q = assimpNodeAnim->mRotationKeys[k];
+							RotationKeyFrame rotKF = RotationKeyFrame();
+							rotKF.time = static_cast<float>(q.mTime);
+							rotKF.value = glm::quat(q.mValue.w, q.mValue.x, q.mValue.y, q.mValue.z);
+							nodeAnimInfo.rotationKeyFrames[k] = rotKF;
+						}
+
+						animInfo.channels[nodeAnimInfo.name] = nodeAnimInfo;
+					}
+					pMeshAnimations->animations[i] = animInfo;
+				}
+
+				drawInfo->pMeshAnimations = pMeshAnimations;
+			}
+
+			// Loading the vertices bones
+			drawInfo->rootNode = m_GenerateBoneHierarchy(scene->mRootNode, drawInfo);
+
+			std::vector<BoneWeightInfo> boneWeights;
+			boneWeights.resize(currMesh->mNumVertices);
+
+			uint numBones = currMesh->mNumBones;
 			drawInfo->bonesInfo.resize(numBones);
-			for (unsigned int boneIdx = 0; boneIdx < numBones; ++boneIdx)
+
+			for (uint boneIdx = 0; boneIdx < numBones; ++boneIdx)
 			{
 				aiBone* bone = currMesh->mBones[boneIdx];
 
-				drawInfo->boneNameId.insert(std::make_pair(bone->mName.C_Str(), boneIdx));
+				std::string name(bone->mName.C_Str());
+				drawInfo->boneNameId.insert(std::make_pair(name, boneIdx));
 
 				// Store the offset matrices
 				BoneInfo info;
 				AssimpToGLM(bone->mOffsetMatrix, info.BoneOffset);
-				drawInfo->bonesInfo.emplace_back(info);
+				drawInfo->bonesInfo[boneIdx] = info;
 
-				for (int weightIdx = 0; weightIdx < bone->mNumWeights; ++weightIdx)
+				for (uint weightIdx = 0; weightIdx < bone->mNumWeights; ++weightIdx)
 				{
 					aiVertexWeight& vertexWeight = bone->mWeights[weightIdx];
 					// BoneId		:	boneIdx
@@ -207,28 +302,28 @@ namespace MyEngine
 					// Weight		:	vertexWeight.mWeight
 
 					sVertex& vertex = drawInfo->pVertices[vertexWeight.mVertexId];
-					
+
 					if (vertex.w1 == 0.0f)
 					{
-						vertex.b1 = boneIdx;
+						vertex.b1 = static_cast<float>(boneIdx);
 						vertex.w1 = vertexWeight.mWeight;
 						continue;
 					}
 					if (vertex.w2 == 0.0f)
 					{
-						vertex.b2 = boneIdx;
+						vertex.b2 = static_cast<float>(boneIdx);
 						vertex.w2 = vertexWeight.mWeight;
 						continue;
 					}
 					if (vertex.w3 == 0.0f)
 					{
-						vertex.b3 = boneIdx;
+						vertex.b3 = static_cast<float>(boneIdx);
 						vertex.w3 = vertexWeight.mWeight;
 						continue;
 					}
 					if (vertex.w4 == 0.0f)
 					{
-						vertex.b4 = boneIdx;
+						vertex.b4 = static_cast<float>(boneIdx);
 						vertex.w4 = vertexWeight.mWeight;
 						continue;
 					}
@@ -236,7 +331,6 @@ namespace MyEngine
 			}
 		}
 
-		drawInfo->minX = minX;
 		drawInfo->minY = minY;
 		drawInfo->minZ = minZ;
 		drawInfo->maxX = maxX;
@@ -256,7 +350,7 @@ namespace MyEngine
 		}
 
 		// Translate the boolean helper flags to the assimp post processing flags
-		unsigned int assimpPostProcessingFlags = this->m_loadAssimpPostProcessingFlags(postProcessOptions);
+		uint assimpPostProcessingFlags = this->m_loadAssimpPostProcessingFlags(postProcessOptions);
 
 		// This is from the assimp help documentation
 		// Create an instance of the Importer class
@@ -284,9 +378,9 @@ namespace MyEngine
 		return true;
 	}
 
-	unsigned int cFileLoader_Imp::m_loadAssimpPostProcessingFlags(cFileLoader::sPostProcessFlags postProcessOptions)
+	uint cFileLoader_Imp::m_loadAssimpPostProcessingFlags(cFileLoader::sPostProcessFlags postProcessOptions)
 	{
-		unsigned int assimpPostProcessingFlags = 0;
+		uint assimpPostProcessingFlags = 0;
 
 		if (postProcessOptions.bProcess_CalcTangentSpace)
 		{

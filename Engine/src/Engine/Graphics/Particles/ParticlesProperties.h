@@ -22,7 +22,7 @@ namespace MyEngine
 
 		glm::vec3 position;
 		glm::quat orientation;
-		float scale;
+		glm::vec3 scale;
 
 		float lifetime;
 	};

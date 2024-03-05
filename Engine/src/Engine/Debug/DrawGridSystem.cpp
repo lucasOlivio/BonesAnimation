@@ -52,7 +52,7 @@ namespace MyEngine
 			GridAABB* pAABB = pairAABB.second;
 
 			glm::mat4 matTransf = glm::mat4(1.0f);
-			TransformUtils::GetTransform(pAABB->minXYZ, pGrid->lengthPerBox.x, matTransf);
+			TransformUtils::GetTransform(pAABB->minXYZ, pGrid->lengthPerBox, matTransf);
 
 			sRenderModelInfo renderInfo = sRenderModelInfo();
 			renderInfo.matModel = matTransf;

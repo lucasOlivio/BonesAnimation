@@ -53,12 +53,12 @@ namespace MyEngine
 		return glm::slerp(startValue, endValue, progress);
 	}
 
-	void AnimationUtils::BuildNodesAnimation(const Node& rootNode, AnimationsInfo& animInfo)
+	void AnimationUtils::BuildNodesAnimation(const Node& rootNode, AnimationInfo& animInfo)
 	{
 		NodeAnimationInfo nodeAnimInfo = NodeAnimationInfo();
 		nodeAnimInfo.name = rootNode.name;
 
-		animInfo.channels.push_back(nodeAnimInfo);
+		animInfo.channels[nodeAnimInfo.name] = nodeAnimInfo;
 
 		for (int i = 0; i < rootNode.children.size(); i++)
 		{

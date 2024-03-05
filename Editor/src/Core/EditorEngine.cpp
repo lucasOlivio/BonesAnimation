@@ -52,7 +52,7 @@ namespace MyEngine
 		pStates->mainSystems.push_back("LightSystem");
 		pStates->mainSystems.push_back("LightFlickerSystem");
 		pStates->mainSystems.push_back("MaterialOffsetSystem");
-		pStates->mainSystems.push_back("NodeAnimationSystem");
+		pStates->mainSystems.push_back("MeshAnimationSystem");
 
 		pStates->mainSystems.push_back("MenuSystem");
 		pStates->mainSystems.push_back("EntityBarSystem");

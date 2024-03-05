@@ -101,7 +101,7 @@ namespace MyEngine
                 
                 particle.orientation = Random::Quat(seed, emitterProps.oriMin, emitterProps.oriMax);
                 particle.position = pTransform->position + Random::Vec3(seed, emitterProps.posMin, emitterProps.posMax);
-                particle.scale = Random::Float(seed, emitterProps.scaMin, emitterProps.scaMax);
+                particle.scale = Random::Vec3(seed, emitterProps.scaMin, emitterProps.scaMax);
                
                 particle.pMesh = pEmitter->pMesh;
                 particle.material = emitterProps.material;

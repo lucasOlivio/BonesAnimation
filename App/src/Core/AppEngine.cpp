@@ -44,7 +44,8 @@ namespace MyEngine
 		pStates->mainSystems.push_back("LightSystem");
 		pStates->mainSystems.push_back("LightFlickerSystem");
 		pStates->mainSystems.push_back("MaterialOffsetSystem");
-		pStates->mainSystems.push_back("AnimationSystem");
+		pStates->mainSystems.push_back("AnimationPlayerSystem");
+		pStates->mainSystems.push_back("MeshAnimationSystem");
 
 		// TODO: This could come from a config file
 		// TODO: Could this be categorized to avoid having to put all in the config?
@@ -53,8 +54,6 @@ namespace MyEngine
 		pStates->mapStateSystems[eGameStates::STARTED] = {};
 
 		pStates->mapStateSystems[eGameStates::RUNNING] = {
-			// Graphics
-			"NodeAnimationSystem",
 			// Physics
 			"MovementSystem",
 			"RotationSystem",
@@ -65,7 +64,7 @@ namespace MyEngine
 			"SoftBodyResponseSystem",
 			"SotBodyConstraintsSystem",
 			// Gameplay
-			//"PlayerControllerSystem",
+			"PlayerControllerSystem",
 			"FlyingCameraSystem"
 
 			// Debug

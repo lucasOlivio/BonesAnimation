@@ -137,7 +137,6 @@ namespace MyEngine
             static bool addFrameBufferView = false;
             static bool addEmitter = false;
             static bool addTransformAnimation = false;
-            static bool addNodeAnimation = false;
             static bool addTiling = false;
             static bool addGravity = false;
             static bool addRigidBody = false;
@@ -162,7 +161,6 @@ namespace MyEngine
             ImGui::Checkbox("FrameBufferView Component", &addFrameBufferView);
             ImGui::Checkbox("Emitter Component", &addEmitter);
             ImGui::Checkbox("TransformAnimation Component", &addTransformAnimation);
-            ImGui::Checkbox("NodeAnimation Component", &addNodeAnimation);
             ImGui::Checkbox("Tiling Component", &addTiling);
             ImGui::Checkbox("Gravity Component", &addGravity);
             ImGui::Checkbox("RigidBody Component", &addRigidBody);
@@ -189,7 +187,6 @@ namespace MyEngine
                 if (addFrameBufferView) m_AddComponent<FrameBufferViewComponent>(pScene, entityId);
                 if (addEmitter) m_AddComponent<EmitterComponent>(pScene, entityId);
                 if (addTransformAnimation) m_AddComponent<TransformAnimationComponent>(pScene, entityId);
-                if (addNodeAnimation) m_AddComponent<NodeAnimationComponent>(pScene, entityId);
                 if (addTiling) m_AddComponent<TilingComponent>(pScene, entityId);
                 if (addGravity) m_AddComponent<GravityComponent>(pScene, entityId);
                 if (addRigidBody) m_AddComponent<RigidBodyComponent>(pScene, entityId);

@@ -73,6 +73,6 @@ namespace MyEngine
 		}
 
 		// Build the animation channels vector from the root node
-		static void BuildNodesAnimation(const Node& rootNode, AnimationsInfo& animInfo);
+		static void BuildNodesAnimation(const Node& rootNode, AnimationInfo& animInfo);
 	};
 }

@@ -276,7 +276,8 @@ namespace MyEngine
                 m_ParseTransformAnimationToDoc(transformAnimationObject, *pTransformAnimation, allocator);
                 entityObject.AddMember("transformAnimation", transformAnimationObject, allocator);
             }
-            if (pEntityManager->HasComponent(entity, sceneIn.GetComponentType<NodeAnimationComponent>()))
+            // Comes from the FBX file
+            /*if (pEntityManager->HasComponent(entity, sceneIn.GetComponentType<NodeAnimationComponent>()))
             {
                 Value nodeAnimationObject;
                 nodeAnimationObject.SetObject();
@@ -284,7 +285,7 @@ namespace MyEngine
                 NodeAnimationComponent* pNodeAnimation = sceneIn.Get<NodeAnimationComponent>(entity);
                 m_ParseNodeAnimationToDoc(nodeAnimationObject, *pNodeAnimation, allocator);
                 entityObject.AddMember("nodeAnimation", nodeAnimationObject, allocator);
-            }
+            }*/
             if (pEntityManager->HasComponent(entity, sceneIn.GetComponentType<TilingComponent>()))
             {
                 Value tilingObject;
@@ -600,9 +601,11 @@ namespace MyEngine
             scaleKeyFrameObject.AddMember("isKeyEvent", scaleKeyFrame.isKeyEvent, allocator);
 
             // Serialize scale value
-            Value scaleValue(kNumberType);
-            scaleValue = scaleKeyFrame.value;
-            scaleKeyFrameObject.AddMember("value", scaleValue, allocator);
+            Value scaleValueArray(kArrayType);
+            scaleValueArray.PushBack(scaleKeyFrame.value.x, allocator);
+            scaleValueArray.PushBack(scaleKeyFrame.value.y, allocator);
+            scaleValueArray.PushBack(scaleKeyFrame.value.z, allocator);
+            scaleKeyFrameObject.AddMember("value", scaleValueArray, allocator);
 
             scaleKeyFramesArray.PushBack(scaleKeyFrameObject, allocator);
         }
@@ -628,105 +631,6 @@ namespace MyEngine
             rotationKeyFramesArray.PushBack(rotationKeyFrameObject, allocator);
         }
         jsonObject.AddMember("rotationKeyFrames", rotationKeyFramesArray, allocator);
-
-        return true;
-    }
-
-    bool SceneSerializerJSON::m_ParseNodeAnimationToDoc(rapidjson::Value& jsonObject, NodeAnimationComponent& animationIn, rapidjson::Document::AllocatorType& allocator)
-    {
-        // HACK: This should have a parser, but i dont want to put other properties into the json parser 
-        using namespace rapidjson;
-
-        ParserJSON parser = ParserJSON();
-
-        jsonObject.AddMember("isActive", animationIn.isActive, allocator);
-        jsonObject.AddMember("animActive", animationIn.animActive, allocator);
-
-        // Building animations
-        Value animationsArray(kArrayType);
-        for (const AnimationsInfo& animation : animationIn.animations)
-        {
-            Value animationObj(kObjectType);
-
-            parser.SetMember(animationObj, "ticksPerSecond", animation.ticksPerSecond, allocator);
-            parser.SetMember(animationObj, "duration", animation.duration, allocator);
-            parser.SetMember(animationObj, "isLoop", animation.isLoop, allocator);
-
-            // Building nodes animations
-            Value channelsArray(kArrayType);
-            for (const NodeAnimationInfo& channel : animation.channels)
-            {
-                Value channelObj(kObjectType);
-
-                parser.SetMember(channelObj, "name", channel.name, allocator);
-
-                // Serialize position keyframes
-                Value positionKeyFramesArray(kArrayType);
-                for (const auto& positionKeyFrame : channel.positionKeyFrames)
-                {
-                    Value positionKeyFrameObject(kObjectType);
-                    positionKeyFrameObject.AddMember("time", positionKeyFrame.time, allocator);
-                    positionKeyFrameObject.AddMember("easeType", (int)positionKeyFrame.easeType, allocator);
-                    positionKeyFrameObject.AddMember("isKeyEvent", positionKeyFrame.isKeyEvent, allocator);
-
-                    // Serialize position value
-                    Value positionValueArray(kArrayType);
-                    positionValueArray.PushBack(positionKeyFrame.value.x, allocator);
-                    positionValueArray.PushBack(positionKeyFrame.value.y, allocator);
-                    positionValueArray.PushBack(positionKeyFrame.value.z, allocator);
-                    positionKeyFrameObject.AddMember("value", positionValueArray, allocator);
-
-                    positionKeyFramesArray.PushBack(positionKeyFrameObject, allocator);
-                }
-                channelObj.AddMember("positionKeyFrames", positionKeyFramesArray, allocator);
-
-                // Serialize scale keyframes
-                Value scaleKeyFramesArray(kArrayType);
-                for (const auto& scaleKeyFrame : channel.scaleKeyFrames)
-                {
-                    Value scaleKeyFrameObject(kObjectType);
-                    scaleKeyFrameObject.AddMember("time", scaleKeyFrame.time, allocator);
-                    scaleKeyFrameObject.AddMember("easeType", (int)scaleKeyFrame.easeType, allocator);
-                    scaleKeyFrameObject.AddMember("isKeyEvent", scaleKeyFrame.isKeyEvent, allocator);
-
-                    // Serialize scale value
-                    Value scaleValue(kNumberType);
-                    scaleValue = scaleKeyFrame.value;
-                    scaleKeyFrameObject.AddMember("value", scaleValue, allocator);
-
-                    scaleKeyFramesArray.PushBack(scaleKeyFrameObject, allocator);
-                }
-                channelObj.AddMember("scaleKeyFrames", scaleKeyFramesArray, allocator);
-
-                // Serialize rotation keyframes
-                Value rotationKeyFramesArray(kArrayType);
-                for (const auto& rotationKeyFrame : channel.rotationKeyFrames)
-                {
-                    Value rotationKeyFrameObject(kObjectType);
-                    rotationKeyFrameObject.AddMember("time", rotationKeyFrame.time, allocator);
-                    rotationKeyFrameObject.AddMember("easeType", (int)rotationKeyFrame.easeType, allocator);
-                    rotationKeyFrameObject.AddMember("isKeyEvent", rotationKeyFrame.isKeyEvent, allocator);
-
-                    // Serialize rotation value
-                    Value rotationValueArray(kArrayType);
-                    rotationValueArray.PushBack(rotationKeyFrame.value.w, allocator);
-                    rotationValueArray.PushBack(rotationKeyFrame.value.x, allocator);
-                    rotationValueArray.PushBack(rotationKeyFrame.value.y, allocator);
-                    rotationValueArray.PushBack(rotationKeyFrame.value.z, allocator);
-                    rotationKeyFrameObject.AddMember("value", rotationValueArray, allocator);
-
-                    rotationKeyFramesArray.PushBack(rotationKeyFrameObject, allocator);
-                }
-                channelObj.AddMember("rotationKeyFrames", rotationKeyFramesArray, allocator);
-
-                channelsArray.PushBack(channelObj, allocator);
-            }
-            animationObj.AddMember("channels", channelsArray, allocator);
-
-            animationsArray.PushBack(animationObj, allocator);
-        }
-
-        jsonObject.AddMember("animations", animationsArray, allocator);
 
         return true;
     }
@@ -1001,11 +905,12 @@ namespace MyEngine
                     TransformAnimationComponent* pTransformAnimation = sceneOut.AddComponent<TransformAnimationComponent>(entityId);
                     m_ParseDocToTransformAnimation(componentObject, *pTransformAnimation);
                 }
-                else if (componentName == "nodeAnimation")
+                // Comes from the FBX file
+                /*else if (componentName == "nodeAnimation")
                 {
                     NodeAnimationComponent* pNodeAnimation = sceneOut.AddComponent<NodeAnimationComponent>(entityId);
                     m_ParseDocToNodeAnimation(componentObject, *pNodeAnimation);
-                }
+                }*/
                 else if (componentName == "tiling")
                 {
                     TilingComponent* pTiling = sceneOut.AddComponent<TilingComponent>(entityId);
@@ -1351,129 +1256,6 @@ namespace MyEngine
         {
             Value& activeObj = jsonObject["isActive"];
             parser.GetValue(activeObj, animationOut.isActive);
-        }
-
-        return true;
-    }
-
-    bool SceneSerializerJSON::m_ParseDocToNodeAnimation(rapidjson::Value& jsonObject, NodeAnimationComponent& animationOut)
-    {
-        // HACK: This should have a parser, but i dont want to put other properties into the json parser 
-        using namespace rapidjson;
-
-        if (!jsonObject["animations"].IsArray())
-        {
-            LOG_ERROR("Expected array of objects for animations in node animations component");
-            return false;
-        }
-
-        ParserJSON parser = ParserJSON();
-
-        Value& activeObj = jsonObject["isActive"];
-        parser.GetValue(activeObj, animationOut.isActive);
-
-        Value& animActiveObj = jsonObject["animActive"];
-        parser.GetValue(animActiveObj, animationOut.animActive);
-
-        for (unsigned int i = 0; i < jsonObject["animations"].Size(); i++)
-        {
-            AnimationsInfo animInfo = AnimationsInfo();
-
-            Value& animObj = jsonObject["animations"][i];
-
-            Value& isLoopObj = animObj["isLoop"];
-            parser.GetValue(isLoopObj, animInfo.isLoop);
-
-            Value& ticksPerSecondObj = animObj["ticksPerSecond"];
-            parser.GetValue(ticksPerSecondObj, animInfo.ticksPerSecond);
-
-            Value& durationObj = animObj["duration"];
-            parser.GetValue(durationObj, animInfo.duration);
-
-            for (unsigned int i = 0; i < animObj["channels"].Size(); i++)
-            {
-                NodeAnimationInfo nodeAnimInfo = NodeAnimationInfo();
-
-                Value& channelObj = animObj["channels"][i];
-
-                parser.GetValue(channelObj["name"], nodeAnimInfo.name);
-
-                for (unsigned int i = 0; i < channelObj["positionKeyFrames"].Size(); i++)
-                {
-                    // Create keyframes
-                    PositionKeyFrame keyFrame = PositionKeyFrame();
-
-                    Value& positionKeyFrames = channelObj["positionKeyFrames"][i];
-
-                    Value& positionObj = positionKeyFrames["value"];
-                    parser.GetValue(positionObj, keyFrame.value);
-
-                    Value& timeObj = positionKeyFrames["time"];
-                    parser.GetValue(timeObj, keyFrame.time);
-
-                    Value& isKeyEventObj = positionKeyFrames["isKeyEvent"];
-                    parser.GetValue(isKeyEventObj, keyFrame.isKeyEvent);
-
-                    int type = 0;
-                    Value& typeObj = positionKeyFrames["easeType"];
-                    parser.GetValue(typeObj, type);
-                    keyFrame.easeType = (eEasingType)type;
-
-                    nodeAnimInfo.positionKeyFrames.push_back(keyFrame);
-                }
-
-                for (unsigned int i = 0; i < channelObj["rotationKeyFrames"].Size(); i++)
-                {
-                    // Create keyframes
-                    RotationKeyFrame keyFrame = RotationKeyFrame();
-
-                    Value& rotationKeyFrames = channelObj["rotationKeyFrames"][i];
-
-                    Value& rotationObj = rotationKeyFrames["value"];
-                    parser.GetValue(rotationObj, keyFrame.value);
-
-                    Value& timeObj = rotationKeyFrames["time"];
-                    parser.GetValue(timeObj, keyFrame.time);
-
-                    Value& isKeyEventObj = rotationKeyFrames["isKeyEvent"];
-                    parser.GetValue(isKeyEventObj, keyFrame.isKeyEvent);
-
-                    int type = 0;
-                    Value& typeObj = rotationKeyFrames["easeType"];
-                    parser.GetValue(typeObj, type);
-                    keyFrame.easeType = (eEasingType)type;
-
-                    nodeAnimInfo.rotationKeyFrames.push_back(keyFrame);
-                }
-
-                for (unsigned int i = 0; i < channelObj["scaleKeyFrames"].Size(); i++)
-                {
-                    // Create keyframes
-                    ScaleKeyFrame keyFrame = ScaleKeyFrame();
-
-                    Value& scaleKeyFrames = channelObj["scaleKeyFrames"][i];
-
-                    Value& scaleObj = scaleKeyFrames["value"];
-                    parser.GetValue(scaleObj, keyFrame.value);
-
-                    Value& timeObj = scaleKeyFrames["time"];
-                    parser.GetValue(timeObj, keyFrame.time);
-
-                    Value& isKeyEventObj = scaleKeyFrames["isKeyEvent"];
-                    parser.GetValue(isKeyEventObj, keyFrame.isKeyEvent);
-
-                    int type = 0;
-                    Value& typeObj = scaleKeyFrames["easeType"];
-                    parser.GetValue(typeObj, type);
-                    keyFrame.easeType = (eEasingType)type;
-
-                    nodeAnimInfo.scaleKeyFrames.push_back(keyFrame);
-                }
-
-                animInfo.channels.push_back(nodeAnimInfo);
-            }
-
-            animationOut.animations.push_back(animInfo);
         }
 
         return true;

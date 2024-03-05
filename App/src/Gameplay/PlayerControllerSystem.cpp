@@ -35,55 +35,25 @@ namespace MyEngine
 	void PlayerControllerSystem::Update(Scene* pScene, float deltaTime)
 	{
 		KeyInputComponent* pKey = CoreLocator::GetKeyInput();
-        for (Entity playerId : SceneView<PlayerComponent, TransformComponent, MovementComponent>(*pScene))
+        for (Entity playerId : SceneView<PlayerComponent>(*pScene))
         {
             PlayerComponent* pPlayer = pScene->Get<PlayerComponent>(playerId);
-            TransformComponent* pTransform = pScene->Get<TransformComponent>(playerId);
-            MovementComponent* pMovement = pScene->Get<MovementComponent>(playerId);
 
-            glm::vec3 playerRotation = TransformUtils::GetQuatAsDegrees(pTransform->orientation);
-
-            glm::vec3 playerFront = glm::normalize(TransformUtils::GetForwardVector(pTransform->orientation));
-            glm::vec3 playerSides = glm::normalize(glm::cross(playerFront, glm::vec3(UP_VECTOR)));
-
-            glm::vec3 newVelocity = glm::vec3(0.0f);
-
-            // Handle key presses for movement
-            if (pKey->key[eKeyCodes::W])
+            // Changing animations
+            if (pKey->key[eKeyCodes::KP_1] || pKey->key[eKeyCodes::DIGIT_1])
             {
-                newVelocity = pPlayer->speed * playerFront;
+                ModelComponent* pModel = pScene->Get<ModelComponent>(playerId);
+
+                MeshAnimations* pMeshAnimations = pModel->pMeshes[pModel->currMesh]->pMeshAnimations;
+                pMeshAnimations->animActive = 0;
             }
-            if (pKey->key[eKeyCodes::S])
+            if (pKey->key[eKeyCodes::KP_2] || pKey->key[eKeyCodes::DIGIT_2])
             {
-                newVelocity = -pPlayer->speed * playerFront;
+                ModelComponent* pModel = pScene->Get<ModelComponent>(playerId);
+
+                MeshAnimations* pMeshAnimations = pModel->pMeshes[pModel->currMesh]->pMeshAnimations;
+                pMeshAnimations->animActive = 1;
             }
-            if (pKey->key[eKeyCodes::A])
-            {
-                newVelocity = -pPlayer->speed * playerSides;
-            }
-            if (pKey->key[eKeyCodes::D])
-            {
-                newVelocity = pPlayer->speed * playerSides;
-            }
-
-            pMovement->velocity = newVelocity;
-
-            // Mouse position for changing forward direction
-            MouseInputComponent* pMouse = CoreLocator::GetMouseInput();
-
-            float xoffset = (pMouse->posX - pMouse->lastPosX) * pMouse->sensitivity;
-
-            // Create quaternions for yaw
-            glm::quat yawQuat = glm::angleAxis(-xoffset, glm::vec3(0.0f, 1.0f, 0.0f));
-
-            // Combine pitch and yaw quaternions
-            glm::quat orientationChange = yawQuat;
-
-            // Apply the combined quaternion to the player's orientation
-            pTransform->orientation = glm::normalize(orientationChange * pTransform->orientation);
-
-            pMouse->lastPosX = pMouse->posX;
-            pMouse->lastPosY = pMouse->posY;
         }
 	}
 

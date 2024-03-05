@@ -113,9 +113,6 @@ namespace MyEngine
         ComponentType TransformAnimationType = pScene->GetComponentType<TransformAnimationComponent>();
         m_componentsUI[TransformAnimationType] = m_TransformAnimationUI;
 
-        ComponentType NodeAnimationType = pScene->GetComponentType<NodeAnimationComponent>();
-        m_componentsUI[NodeAnimationType] = m_NodeAnimationUI;
-
         ComponentType TilingType = pScene->GetComponentType<TilingComponent>();
         m_componentsUI[TilingType] = m_TilingUI;
 
@@ -249,7 +246,9 @@ namespace MyEngine
 
         Separator();
         ImGui::Text("Scale");
-        ImGui::InputFloat("##Scale", &pTransform->scale);
+        ImGui::InputFloat("X##ScaleX", &pTransform->scale.x);
+        ImGui::InputFloat("Y##ScaleY", &pTransform->scale.y);
+        ImGui::InputFloat("Z##ScaleZ", &pTransform->scale.z);
 	}
 
     void ComponentUI::m_MovementUI(Scene* pScene, Entity entityId)
@@ -712,7 +711,7 @@ namespace MyEngine
         {
             ScaleKeyFrame& keyFrame = pTransformAnimation->scaleKeyFrames[i];
             ImGui::InputFloat(("Time##AnimationScale" + std::to_string(i)).c_str(), &keyFrame.time);
-            ImGui::InputFloat(("Scale##AnimationScale" + std::to_string(i)).c_str(), &keyFrame.value);
+            ImGui::InputFloat3(("Scale##AnimationScale" + std::to_string(i)).c_str(), &keyFrame.value.x);
             ImGui::InputInt(("EaseType##AnimationScale" + std::to_string(i)).c_str(), reinterpret_cast<int*>(&keyFrame.easeType));
 
             ImGui::Text("Is key event:");
@@ -770,157 +769,6 @@ namespace MyEngine
         {
             RotationKeyFrame newKeyFrame;
             pTransformAnimation->rotationKeyFrames.push_back(newKeyFrame);
-        }
-
-        Separator();
-    }
-
-    void ComponentUI::m_NodeAnimationUI(Scene* pScene, Entity entityId)
-    {
-        Title("Node Animation Component:");
-
-        NodeAnimationComponent* pNodeAnimation = pScene->Get<NodeAnimationComponent>(entityId);
-        if (!pNodeAnimation)
-        {
-            return;
-        }
-
-        ImGui::InputInt("Active animation##NodeAnimationanimActive", &pNodeAnimation->animActive);
-        ImGui::Checkbox("Is Active##NodeAnimationIsActive", &pNodeAnimation->isActive);
-
-        for (size_t i = 0; i < pNodeAnimation->animations.size(); ++i)
-        {
-            AnimationsInfo& animInfo = pNodeAnimation->animations[i];
-
-            ImGui::Text("Animation name");
-            ImGui::InputText(("##AnimationName" + std::to_string(i)).c_str(), &animInfo.name);
-
-            ImGui::InputFloat(("Duration##NodeAnimationDuration" + std::to_string(i)).c_str(), &animInfo.duration);
-            ImGui::InputFloat(("Ticks Per Second##NodeAnimationticksPerSecond" + std::to_string(i)).c_str(), &animInfo.ticksPerSecond);
-            ImGui::InputFloat(("Current time##NodeAnimationticksCurrTime" + std::to_string(i)).c_str(), &animInfo.currTime);
-            ImGui::Checkbox(("Is Loop##NodeAnimationIsLoop" + std::to_string(i)).c_str(), &animInfo.isLoop);
-
-            for (size_t j = 0; j < animInfo.channels.size(); ++j)
-            {
-                NodeAnimationInfo& nodeAnimInfo = animInfo.channels[j];
-
-                ImGui::Text(("Node name:" + nodeAnimInfo.name).c_str());
-
-                // Edit position keyframes
-                ImGui::Text("Position Keyframes:");
-                for (size_t i = 0; i < nodeAnimInfo.positionKeyFrames.size(); ++i)
-                {
-                    PositionKeyFrame& keyFrame = nodeAnimInfo.positionKeyFrames[i];
-                    ImGui::InputFloat(("Time##AnimationPos" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.time);
-                    ImGui::InputFloat3(("Position##AnimationPos" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.value[0]);
-                    ImGui::InputInt(("EaseType##AnimationPos" + std::to_string(i) + "-" + std::to_string(j)).c_str(), reinterpret_cast<int*>(&keyFrame.easeType));
-
-                    ImGui::Text("Is key event:");
-                    ImGui::Checkbox(("##AnimationPosKeyEvent" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.isKeyEvent);
-
-                    // Button to remove this keyframe
-                    if (ImGui::Button(("Remove##AnimationPos" + std::to_string(i) + "-" + std::to_string(j)).c_str()))
-                    {
-                        nodeAnimInfo.positionKeyFrames.erase(nodeAnimInfo.positionKeyFrames.begin() + i);
-                        --i;
-                    }
-                }
-
-                if (ImGui::Button("Add Position Keyframe"))
-                {
-                    PositionKeyFrame newKeyFrame;
-                    nodeAnimInfo.positionKeyFrames.push_back(newKeyFrame);
-                }
-
-                Separator();
-
-                // Edit scale keyframes
-                ImGui::Text("Scale Keyframes:");
-                for (size_t i = 0; i < nodeAnimInfo.scaleKeyFrames.size(); ++i)
-                {
-                    ScaleKeyFrame& keyFrame = nodeAnimInfo.scaleKeyFrames[i];
-                    ImGui::InputFloat(("Time##AnimationScale" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.time);
-                    ImGui::InputFloat(("Scale##AnimationScale" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.value);
-                    ImGui::InputInt(("EaseType##AnimationScale" + std::to_string(i) + "-" + std::to_string(j)).c_str(), reinterpret_cast<int*>(&keyFrame.easeType));
-
-                    ImGui::Text("Is key event:");
-                    ImGui::Checkbox(("##AnimationScaleKeyEvent" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.isKeyEvent);
-
-                    // Button to remove this keyframe
-                    if (ImGui::Button(("Remove##AnimationScale" + std::to_string(i) + "-" + std::to_string(j)).c_str()))
-                    {
-                        nodeAnimInfo.scaleKeyFrames.erase(nodeAnimInfo.scaleKeyFrames.begin() + i);
-                        --i;
-                    }
-                }
-
-                if (ImGui::Button("Add Scale Keyframe"))
-                {
-                    ScaleKeyFrame newKeyFrame;
-                    nodeAnimInfo.scaleKeyFrames.push_back(newKeyFrame);
-                }
-
-                Separator();
-
-                // Edit rotation keyframes
-                ImGui::Text("Rotation Keyframes:");
-                for (size_t i = 0; i < nodeAnimInfo.rotationKeyFrames.size(); ++i)
-                {
-                    RotationKeyFrame& keyFrame = nodeAnimInfo.rotationKeyFrames[i];
-                    ImGui::InputFloat(("Time##AnimationRot" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.time);
-
-                    ImGui::Text("Rotation");
-                    glm::vec3 euler = glm::degrees(glm::eulerAngles(keyFrame.value));
-                    if (ImGui::InputFloat(("X##AnimationRotationX" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &euler.x)) {
-                        keyFrame.value = glm::quat(glm::radians(euler));
-                    }
-                    if (ImGui::InputFloat(("Y##AnimationRotationY" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &euler.y)) {
-                        keyFrame.value = glm::quat(glm::radians(euler));
-                    }
-                    if (ImGui::InputFloat(("Z##AnimationRotationZ" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &euler.z)) {
-                        keyFrame.value = glm::quat(glm::radians(euler));
-                    }
-
-                    ImGui::InputInt(("EaseType##AnimationRot" + std::to_string(i) + "-" + std::to_string(j)).c_str(), reinterpret_cast<int*>(&keyFrame.easeType));
-
-                    ImGui::Text("Is key event:");
-                    ImGui::Checkbox(("##AnimationRotKeyEvent" + std::to_string(i) + "-" + std::to_string(j)).c_str(), &keyFrame.isKeyEvent);
-
-                    // Button to remove this keyframe
-                    if (ImGui::Button(("Remove##AnimationRot" + std::to_string(i) + "-" + std::to_string(j)).c_str()))
-                    {
-                        nodeAnimInfo.rotationKeyFrames.erase(nodeAnimInfo.rotationKeyFrames.begin() + i);
-                        --i;
-                    }
-                }
-
-                if (ImGui::Button("Add Rotation Keyframe"))
-                {
-                    RotationKeyFrame newKeyFrame;
-                    nodeAnimInfo.rotationKeyFrames.push_back(newKeyFrame);
-                }
-
-                Separator();
-            }
-
-            Separator();
-        }
-
-        if (ImGui::Button("Add animation"))
-        {
-            AnimationsInfo newAnimInfo;
-
-            // Build all the nodes from the main mesh
-            ModelComponent* pModel = pScene->Get<ModelComponent>(entityId);
-            if (!pModel || pModel->pMeshes.size() == 0 || pModel->pMeshes[0] == nullptr)
-            {
-                return;
-            }
-
-            sMesh* pMesh = pModel->pMeshes[0];
-            AnimationUtils::BuildNodesAnimation(*(pMesh->rootNode), newAnimInfo);
-
-            pNodeAnimation->animations.push_back(newAnimInfo);
         }
 
         Separator();

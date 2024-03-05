@@ -2,6 +2,8 @@
 
 #include "Engine/Core/Shapes.hpp"
 
+#include "Engine/Graphics/Animations/AnimationProperties.h"
+
 #include <map>
 #include <string>
 #include <glm/glm.hpp>
@@ -21,17 +23,30 @@ namespace MyEngine
 
 	struct BoneInfo
 	{
-		glm::mat4 BoneOffset;				// Offset from the parent bone/node
-		glm::mat4 FinalTransformation;		// Calculated transformation used for rendering
-		glm::mat4 GlobalTransformation;		// used for the bone hierarchy transformation calculations when animating
+		glm::mat4 BoneOffset = glm::mat4(1.0f);				// Offset from the parent bone/node
+		glm::mat4 FinalTransformation = glm::mat4(1.0f);		// Calculated transformation used for rendering
+		glm::mat4 GlobalTransformation = glm::mat4(1.0f);		// used for the bone hierarchy transformation calculations when animating
 	};
 
 	struct Node
 	{
 		Node(const std::string& name_) : name(name_) { }
+		
+		int id;
 		std::string name;
-		glm::mat4 transformation;
+		
+		glm::mat4 transformation = glm::mat4(0.0f);
+
 		std::vector<Node*> children;
+	};
+
+	struct MeshAnimations
+	{
+		std::vector<AnimationInfo> animations;
+
+		int animActive = 0; // Animation currently active
+
+		bool isActive = true;
 	};
 
 	struct sMesh
@@ -117,6 +132,12 @@ namespace MyEngine
 			delete[] pIndices;
 			delete[] pTriangles;
 			delete[] pVertices;
+
+			for (int i = 0; i < vecNodes.size(); i++)
+			{
+				delete vecNodes[i];
+			}
+			delete pMeshAnimations;
 		}
 
 		glm::vec3 GetExtent()
@@ -150,10 +171,14 @@ namespace MyEngine
 		float maxX, maxY, maxZ;
 		float minX, minY, minZ;
 
-		// Bones
+		// Bones & animations
+		MeshAnimations* pMeshAnimations = nullptr;
+
 		std::vector<BoneInfo> bonesInfo;
 		std::map<std::string /*name*/, int /*id*/> boneNameId;
-		Node* rootNode;
+		
+		Node* rootNode = nullptr;
+		std::vector<Node*> vecNodes;
 	};
 
 	struct sMaterialInfo
@@ -198,6 +223,8 @@ namespace MyEngine
 		glm::vec3 tileAxis = glm::vec3(1.0f);
 		glm::vec3 tileOffset = glm::vec3(0.0f);
 
+		std::vector<BoneInfo> bonesInfos;
+
 		int VAO_ID = 0;
 		int numberOfIndices = 0;
 		
@@ -207,10 +234,11 @@ namespace MyEngine
 		float distToCamera = 0.0f;
 
 		bool isWireFrame = false;
+		bool isFBOView = false;
 		bool doNotLight = false;
 		bool useDefaultColor = false;
 		bool useColorTexture = false;
 		bool useDebugColor = false;
-		bool isFBOView = false;
+		bool useBones = false;
 	};
 }

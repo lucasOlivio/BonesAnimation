@@ -16,9 +16,15 @@ namespace MyEngine
 		pShader->SetUniformFloat("doNotLight", renderInfo.doNotLight);
 		pShader->SetUniformFloat("bUseColorTexture", renderInfo.useColorTexture);
 
-		// Debug variables
 		pShader->SetUniformFloat("bUseDefaultColor", renderInfo.useDefaultColor);
 		pShader->SetUniformVec3("defaultColor", renderInfo.defaultColor);
+
+		pShader->SetUniformFloat("bUseBones", renderInfo.useBones);
+		for (int i = 0; i < renderInfo.bonesInfos.size(); i++)
+		{
+			const BoneInfo& bone = renderInfo.bonesInfos[i];
+			pShader->SetUniformMatrix4f(("matBones[" + std::to_string(i) + "]").c_str(), bone.FinalTransformation);
+		}
 
 		// Debug variables
 		pShader->SetUniformFloat("bUseDebugColour", renderInfo.useDebugColor);

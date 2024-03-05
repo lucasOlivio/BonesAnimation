@@ -38,7 +38,7 @@ namespace MyEngine
             for (SoftBodyParticle* particle : pSoftBody->vecParticles)
             {
                 glm::mat4 matTransf = glm::mat4(1.0f);
-                TransformUtils::GetTransform(particle->position, 1.0f, matTransf);
+                TransformUtils::GetTransform(particle->position, glm::vec3(1.0f), matTransf);
 
                 sRenderModelInfo renderInfo = sRenderModelInfo();
                 renderInfo.matModel = matTransf;

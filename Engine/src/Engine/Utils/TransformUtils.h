@@ -15,15 +15,15 @@ namespace MyEngine
 
         static void ApplyRotation(const glm::quat& qOrientation, glm::mat4& matModelOut);
 
-		static void ApplyScale(const float& scale, glm::mat4& matModelOut);
+		static void ApplyScale(const glm::vec3& scale, glm::mat4& matModelOut);
 
 		static void GetTransform(const glm::vec3& position,
                                  const glm::quat& orientation,
-                                 const float& scale, 
+                                 const glm::vec3& scale,
                                  glm::mat4& matModelOut);
 
 		static void GetTransform(const glm::vec3& position,
-								 const float& scale, 
+								 const glm::vec3& scale,
 								 glm::mat4& matModelOut);
 
 		static glm::vec3 GetUpVector(const glm::quat& orientation);
@@ -40,18 +40,18 @@ namespace MyEngine
 		// Use transformations to convert the point from local to world position
 		static glm::vec3 LocalToWorldPoint(const glm::vec3& point,
                                            const glm::vec3& position, const glm::quat& orientation,
-                                           const float& scale, 
+                                           const glm::vec3& scale,
 										   glm::mat4& parentMat = glm::mat4(1.0f));
 		static glm::vec3 LocalToWorldPoint(const glm::vec3& point,
-										   const glm::vec3& position, const float& scale,
+										   const glm::vec3& position, const glm::vec3& scale,
                                            glm::mat4& parentMat = glm::mat4(1.0f));
 		
 		static glm::vec3 WorldToLocalPoint(const glm::vec3& point,
                                            const glm::vec3& position, const glm::quat& orientation,
-                                           const float& scale, 
+                                           const glm::vec3& scale,
 										   glm::mat4& parentMat = glm::mat4(1.0f));
 		static glm::vec3 WorldToLocalPoint(const glm::vec3& point,
-										   const glm::vec3& position, const float& scale,
+										   const glm::vec3& position, const glm::vec3& scale,
                                            glm::mat4& parentMat = glm::mat4(1.0f));
 
 		static float DistanceToCamera(Scene* pScene, const int& FBOID, const glm::vec3& position);

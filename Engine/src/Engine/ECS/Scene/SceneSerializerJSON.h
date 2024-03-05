@@ -61,9 +61,6 @@ namespace MyEngine
 		bool m_ParseTransformAnimationToDoc(rapidjson::Value& jsonObject, 
 											TransformAnimationComponent& animationIn,
 											rapidjson::Document::AllocatorType& allocator);
-		bool m_ParseNodeAnimationToDoc(rapidjson::Value& jsonObject, 
-										NodeAnimationComponent& animationIn,
-										rapidjson::Document::AllocatorType& allocator);
 		bool m_ParseTilingToDoc(rapidjson::Value& jsonObject, 
 								  TilingComponent& tilingIn,
 								  rapidjson::Document::AllocatorType& allocator);
@@ -127,8 +124,6 @@ namespace MyEngine
 							   FrameBufferViewComponent& framebufferViewOut);
 		bool m_ParseDocToTransformAnimation(rapidjson::Value& jsonObject, 
 							   TransformAnimationComponent& animationOut);
-		bool m_ParseDocToNodeAnimation(rapidjson::Value& jsonObject, 
-							   NodeAnimationComponent& animationOut);
 		bool m_ParseDocToTiling(rapidjson::Value& jsonObject, 
 							   TilingComponent& tilingOut);
 		bool m_ParseDocToEmitter(rapidjson::Value& jsonObject, 

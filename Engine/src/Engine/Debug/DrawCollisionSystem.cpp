@@ -37,7 +37,7 @@ namespace MyEngine
 		for (const sCollisionData& coll : currFrameColls)
 		{
 			glm::mat4 matTransf = glm::mat4(1.0f);
-			TransformUtils::GetTransform(coll.contactPoint, 1.0f, matTransf);
+			TransformUtils::GetTransform(coll.contactPoint, glm::vec3(1.0f), matTransf);
 
 			sRenderModelInfo renderInfo = sRenderModelInfo();
 			renderInfo.matModel = matTransf;

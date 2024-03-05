@@ -53,6 +53,7 @@ void main()
 		boneTransform += matBones[int(vBoneIds[1])] * vBoneWeights[1];
 		boneTransform += matBones[int(vBoneIds[2])] * vBoneWeights[2];
 		boneTransform += matBones[int(vBoneIds[3])] * vBoneWeights[3];
+
 		vertexModelPosition = boneTransform * vertexModelPosition;
 	}
 

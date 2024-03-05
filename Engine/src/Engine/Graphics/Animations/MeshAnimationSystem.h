@@ -8,13 +8,13 @@
 namespace MyEngine
 {
 	// Handles all the transform movements based on the time and the key frames for the animation
-	class NodeAnimationSystem : public iSystem
+	class MeshAnimationSystem : public iSystem
 	{
 	public:
-		NodeAnimationSystem() = default;
-		virtual ~NodeAnimationSystem() { };
+		MeshAnimationSystem() = default;
+		virtual ~MeshAnimationSystem() { };
 
-		virtual std::string SystemName() { return "NodeAnimationSystem"; };
+		virtual std::string SystemName() { return "MeshAnimationSystem"; };
 
 		virtual void Init();
 
@@ -29,7 +29,11 @@ namespace MyEngine
 		virtual void Shutdown();
 
 	private:
-		void m_CalculateMatrices(sMesh* pMesh, NodeAnimationComponent* pNodeAnim, Node* node, const glm::mat4& parentTransformationMatrix, double keyFrameTime);
+		void m_CalculateMatrices(sMesh* pMesh,
+								Node& node,
+								AnimationInfo& animation,
+								const glm::mat4& parentTransformationMatrix, 
+								const glm::mat4& globalInverseMat);
 
 	};
 }

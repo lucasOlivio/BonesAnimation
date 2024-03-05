@@ -41,7 +41,7 @@ namespace MyEngine
                 currTime, pAnimation->currStartRotKF, pAnimation->currEndRotKF, pTransform->orientation);
 
             // Scale
-            AnimationUtils::InterpolateAndApply<ScaleKeyFrame, float>(pAnimation->scaleKeyFrames,
+            AnimationUtils::InterpolateAndApply<ScaleKeyFrame, glm::vec3>(pAnimation->scaleKeyFrames,
                 currTime, pAnimation->currStartScaKF, pAnimation->currEndScaKF, pTransform->scale);
         }
     }
