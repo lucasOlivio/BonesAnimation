@@ -20,262 +20,262 @@ namespace MyEngine
 
 	void MeshAnimationSystem::Start(Scene* pScene)
 	{
-		for (Entity entityId : SceneView<TagComponent, TransformComponent, ModelComponent>(*pScene))
-		{
-			TagComponent* pTag = pScene->Get<TagComponent>(entityId);
-			TransformComponent* pTransform = pScene->Get<TransformComponent>(entityId);
-			ModelComponent* pModel = pScene->Get<ModelComponent>(entityId);
+		//for (Entity entityId : SceneView<TagComponent, TransformComponent, ModelComponent>(*pScene))
+		//{
+		//	TagComponent* pTag = pScene->Get<TagComponent>(entityId);
+		//	TransformComponent* pTransform = pScene->Get<TransformComponent>(entityId);
+		//	ModelComponent* pModel = pScene->Get<ModelComponent>(entityId);
 
-			if (pTag->name != "character")
-			{
-				continue;
-			}
+		//	if (pTag->name != "character")
+		//	{
+		//		continue;
+		//	}
 
-			// ANIMATION TEST
-			MeshAnimations* pMeshAnimations = new MeshAnimations();
-			pMeshAnimations->isActive = true;
-			pMeshAnimations->animActive = 0;
+		//	// ANIMATION TEST
+		//	MeshAnimations* pMeshAnimations = new MeshAnimations();
+		//	pMeshAnimations->isActive = true;
+		//	pMeshAnimations->animActive = 0;
 
-			pMeshAnimations->animations.resize(2);
-			AnimationInfo animInfo = AnimationInfo();
+		//	pMeshAnimations->animations.resize(2);
+		//	AnimationInfo animInfo = AnimationInfo();
 
-			 // ANIMATION 1
-			{
-				animInfo.name = "test1";
-				animInfo.duration = 60.0f;
-				animInfo.ticksPerSecond = 60.0f;
+		//	 // ANIMATION 1
+		//	{
+		//		animInfo.name = "test1";
+		//		animInfo.duration = 60.0f;
+		//		animInfo.ticksPerSecond = 60.0f;
 
-				for (uint j = 0; j < 1; ++j)
-				{
-					// LEFT ARM
-					NodeAnimationInfo nodeAnimInfo = NodeAnimationInfo();
-					nodeAnimInfo.name = "mixamorig:LeftArm";
+		//		for (uint j = 0; j < 1; ++j)
+		//		{
+		//			// LEFT ARM
+		//			NodeAnimationInfo nodeAnimInfo = NodeAnimationInfo();
+		//			nodeAnimInfo.name = "mixamorig:LeftArm";
 
-					nodeAnimInfo.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF = RotationKeyFrame();
-					rotKF.time = 0.0f;
-					rotKF.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
-					nodeAnimInfo.rotationKeyFrames[0] = rotKF;
+		//			RotationKeyFrame rotKF = RotationKeyFrame();
+		//			rotKF.time = 0.0f;
+		//			rotKF.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
+		//			nodeAnimInfo.rotationKeyFrames[0] = rotKF;
 
-					RotationKeyFrame rotKF2 = RotationKeyFrame();
-					rotKF2.time = 60.0f;
-					rotKF2.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, -0.3826834f);
-					nodeAnimInfo.rotationKeyFrames[1] = rotKF2;
+		//			RotationKeyFrame rotKF2 = RotationKeyFrame();
+		//			rotKF2.time = 60.0f;
+		//			rotKF2.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, -0.3826834f);
+		//			nodeAnimInfo.rotationKeyFrames[1] = rotKF2;
 
-					RotationKeyFrame rotKF3 = RotationKeyFrame();
-					rotKF3.time = 120.0f;
-					rotKF3.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
-					nodeAnimInfo.rotationKeyFrames[2] = rotKF3;
+		//			RotationKeyFrame rotKF3 = RotationKeyFrame();
+		//			rotKF3.time = 120.0f;
+		//			rotKF3.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
+		//			nodeAnimInfo.rotationKeyFrames[2] = rotKF3;
 
-					animInfo.channels[nodeAnimInfo.name] = nodeAnimInfo;
+		//			animInfo.channels[nodeAnimInfo.name] = nodeAnimInfo;
 
-					// RIGHT ARM
-					NodeAnimationInfo nodeAnimInfo2 = NodeAnimationInfo();
-					nodeAnimInfo2.name = "mixamorig:RightArm";
+		//			// RIGHT ARM
+		//			NodeAnimationInfo nodeAnimInfo2 = NodeAnimationInfo();
+		//			nodeAnimInfo2.name = "mixamorig:RightArm";
 
-					nodeAnimInfo2.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo2.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF4 = RotationKeyFrame();
-					rotKF4.time = 0.0f;
-					rotKF4.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
-					nodeAnimInfo2.rotationKeyFrames[0] = rotKF4;
+		//			RotationKeyFrame rotKF4 = RotationKeyFrame();
+		//			rotKF4.time = 0.0f;
+		//			rotKF4.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
+		//			nodeAnimInfo2.rotationKeyFrames[0] = rotKF4;
 
-					RotationKeyFrame rotKF5 = RotationKeyFrame();
-					rotKF5.time = 60.0f;
-					rotKF5.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, -0.3826834f);
-					nodeAnimInfo2.rotationKeyFrames[1] = rotKF5;
+		//			RotationKeyFrame rotKF5 = RotationKeyFrame();
+		//			rotKF5.time = 60.0f;
+		//			rotKF5.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, -0.3826834f);
+		//			nodeAnimInfo2.rotationKeyFrames[1] = rotKF5;
 
-					RotationKeyFrame rotKF6 = RotationKeyFrame();
-					rotKF6.time = 120.0f;
-					rotKF6.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
-					nodeAnimInfo2.rotationKeyFrames[2] = rotKF6;
+		//			RotationKeyFrame rotKF6 = RotationKeyFrame();
+		//			rotKF6.time = 120.0f;
+		//			rotKF6.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.3826834f);
+		//			nodeAnimInfo2.rotationKeyFrames[2] = rotKF6;
 
-					animInfo.channels[nodeAnimInfo2.name] = nodeAnimInfo2;
+		//			animInfo.channels[nodeAnimInfo2.name] = nodeAnimInfo2;
 
-					// LEFT LEG
-					NodeAnimationInfo nodeAnimInfo3 = NodeAnimationInfo();
-					nodeAnimInfo3.name = "mixamorig:LeftUpLeg";
+		//			// LEFT LEG
+		//			NodeAnimationInfo nodeAnimInfo3 = NodeAnimationInfo();
+		//			nodeAnimInfo3.name = "mixamorig:LeftUpLeg";
 
-					nodeAnimInfo3.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo3.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF7 = RotationKeyFrame();
-					rotKF7.time = 0.0f;
-					rotKF7.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo3.rotationKeyFrames[0] = rotKF7;
+		//			RotationKeyFrame rotKF7 = RotationKeyFrame();
+		//			rotKF7.time = 0.0f;
+		//			rotKF7.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo3.rotationKeyFrames[0] = rotKF7;
 
-					RotationKeyFrame rotKF8 = RotationKeyFrame();
-					rotKF8.time = 60.0f;
-					rotKF8.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo3.rotationKeyFrames[1] = rotKF8;
+		//			RotationKeyFrame rotKF8 = RotationKeyFrame();
+		//			rotKF8.time = 60.0f;
+		//			rotKF8.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo3.rotationKeyFrames[1] = rotKF8;
 
-					RotationKeyFrame rotKF9 = RotationKeyFrame();
-					rotKF9.time = 120.0f;
-					rotKF9.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo3.rotationKeyFrames[2] = rotKF9;
+		//			RotationKeyFrame rotKF9 = RotationKeyFrame();
+		//			rotKF9.time = 120.0f;
+		//			rotKF9.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo3.rotationKeyFrames[2] = rotKF9;
 
-					animInfo.channels[nodeAnimInfo3.name] = nodeAnimInfo3;
+		//			animInfo.channels[nodeAnimInfo3.name] = nodeAnimInfo3;
 
-					// RIGHT LEG
-					NodeAnimationInfo nodeAnimInfo4 = NodeAnimationInfo();
-					nodeAnimInfo4.name = "mixamorig:RightUpLeg";
+		//			// RIGHT LEG
+		//			NodeAnimationInfo nodeAnimInfo4 = NodeAnimationInfo();
+		//			nodeAnimInfo4.name = "mixamorig:RightUpLeg";
 
-					nodeAnimInfo4.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo4.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF10 = RotationKeyFrame();
-					rotKF10.time = 0.0f;
-					rotKF10.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo4.rotationKeyFrames[0] = rotKF10;
+		//			RotationKeyFrame rotKF10 = RotationKeyFrame();
+		//			rotKF10.time = 0.0f;
+		//			rotKF10.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo4.rotationKeyFrames[0] = rotKF10;
 
-					RotationKeyFrame rotKF11 = RotationKeyFrame();
-					rotKF11.time = 60.0f;
-					rotKF11.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo4.rotationKeyFrames[1] = rotKF11;
+		//			RotationKeyFrame rotKF11 = RotationKeyFrame();
+		//			rotKF11.time = 60.0f;
+		//			rotKF11.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo4.rotationKeyFrames[1] = rotKF11;
 
-					RotationKeyFrame rotKF12 = RotationKeyFrame();
-					rotKF12.time = 120.0f;
-					rotKF12.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo4.rotationKeyFrames[2] = rotKF12;
+		//			RotationKeyFrame rotKF12 = RotationKeyFrame();
+		//			rotKF12.time = 120.0f;
+		//			rotKF12.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo4.rotationKeyFrames[2] = rotKF12;
 
-					animInfo.channels[nodeAnimInfo4.name] = nodeAnimInfo4;
-				}
-				animInfo.timeLastFrame = 120.0f;
+		//			animInfo.channels[nodeAnimInfo4.name] = nodeAnimInfo4;
+		//		}
+		//		animInfo.timeLastFrame = 120.0f;
 
-				pMeshAnimations->animations[0] = animInfo;
-			}
+		//		pMeshAnimations->animations[0] = animInfo;
+		//	}
 
-			// ANIMATION 2
-			{
-				AnimationInfo animInfo2 = AnimationInfo();
+		//	// ANIMATION 2
+		//	{
+		//		AnimationInfo animInfo2 = AnimationInfo();
 
-				animInfo2.name = "test2";
-				animInfo2.duration = 60.0f;
-				animInfo2.ticksPerSecond = 60.0f;
+		//		animInfo2.name = "test2";
+		//		animInfo2.duration = 60.0f;
+		//		animInfo2.ticksPerSecond = 60.0f;
 
-				for (uint j = 0; j < 1; ++j)
-				{
-					// HIP
-					NodeAnimationInfo nodeAnimInfoHip = NodeAnimationInfo();
-					nodeAnimInfoHip.name = "mixamorig:Hips";
+		//		for (uint j = 0; j < 1; ++j)
+		//		{
+		//			// HIP
+		//			NodeAnimationInfo nodeAnimInfoHip = NodeAnimationInfo();
+		//			nodeAnimInfoHip.name = "mixamorig:Hips";
 
-					nodeAnimInfoHip.positionKeyFrames.resize(3);
+		//			nodeAnimInfoHip.positionKeyFrames.resize(3);
 
-					PositionKeyFrame posKF = PositionKeyFrame();
-					posKF.time = 0.0f;
-					posKF.value = glm::vec3(0.0f, 0.91f, 0.0f);
-					nodeAnimInfoHip.positionKeyFrames[0] = posKF;
+		//			PositionKeyFrame posKF = PositionKeyFrame();
+		//			posKF.time = 0.0f;
+		//			posKF.value = glm::vec3(0.0f, 0.91f, 0.0f);
+		//			nodeAnimInfoHip.positionKeyFrames[0] = posKF;
 
-					PositionKeyFrame posKF2 = PositionKeyFrame();
-					posKF2.time = 60.0f;
-					posKF2.value = glm::vec3(0.0f, 2.0f, 0.0f);
-					nodeAnimInfoHip.positionKeyFrames[1] = posKF2;
+		//			PositionKeyFrame posKF2 = PositionKeyFrame();
+		//			posKF2.time = 60.0f;
+		//			posKF2.value = glm::vec3(0.0f, 2.0f, 0.0f);
+		//			nodeAnimInfoHip.positionKeyFrames[1] = posKF2;
 
-					PositionKeyFrame posKF3 = PositionKeyFrame();
-					posKF3.time = 120.0f;
-					posKF3.value = glm::vec3(0.0f, 0.91f, 0.0f);
-					nodeAnimInfoHip.positionKeyFrames[2] = posKF3;
+		//			PositionKeyFrame posKF3 = PositionKeyFrame();
+		//			posKF3.time = 120.0f;
+		//			posKF3.value = glm::vec3(0.0f, 0.91f, 0.0f);
+		//			nodeAnimInfoHip.positionKeyFrames[2] = posKF3;
 
-					animInfo2.channels[nodeAnimInfoHip.name] = nodeAnimInfoHip;
+		//			animInfo2.channels[nodeAnimInfoHip.name] = nodeAnimInfoHip;
 
-					// LEFT ARM
-					NodeAnimationInfo nodeAnimInfo = NodeAnimationInfo();
-					nodeAnimInfo.name = "mixamorig:LeftArm";
+		//			// LEFT ARM
+		//			NodeAnimationInfo nodeAnimInfo = NodeAnimationInfo();
+		//			nodeAnimInfo.name = "mixamorig:LeftArm";
 
-					nodeAnimInfo.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF = RotationKeyFrame();
-					rotKF.time = 0.0f;
-					rotKF.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo.rotationKeyFrames[0] = rotKF;
+		//			RotationKeyFrame rotKF = RotationKeyFrame();
+		//			rotKF.time = 0.0f;
+		//			rotKF.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo.rotationKeyFrames[0] = rotKF;
 
-					RotationKeyFrame rotKF2 = RotationKeyFrame();
-					rotKF2.time = 60.0f;
-					rotKF2.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo.rotationKeyFrames[1] = rotKF2;
+		//			RotationKeyFrame rotKF2 = RotationKeyFrame();
+		//			rotKF2.time = 60.0f;
+		//			rotKF2.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo.rotationKeyFrames[1] = rotKF2;
 
-					RotationKeyFrame rotKF3 = RotationKeyFrame();
-					rotKF3.time = 120.0f;
-					rotKF3.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo.rotationKeyFrames[2] = rotKF3;
+		//			RotationKeyFrame rotKF3 = RotationKeyFrame();
+		//			rotKF3.time = 120.0f;
+		//			rotKF3.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo.rotationKeyFrames[2] = rotKF3;
 
-					animInfo2.channels[nodeAnimInfo.name] = nodeAnimInfo;
+		//			animInfo2.channels[nodeAnimInfo.name] = nodeAnimInfo;
 
-					// RIGHT ARM
-					NodeAnimationInfo nodeAnimInfo2 = NodeAnimationInfo();
-					nodeAnimInfo2.name = "mixamorig:RightArm";
+		//			// RIGHT ARM
+		//			NodeAnimationInfo nodeAnimInfo2 = NodeAnimationInfo();
+		//			nodeAnimInfo2.name = "mixamorig:RightArm";
 
-					nodeAnimInfo2.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo2.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF4 = RotationKeyFrame();
-					rotKF4.time = 0.0f;
-					rotKF4.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo2.rotationKeyFrames[0] = rotKF4;
+		//			RotationKeyFrame rotKF4 = RotationKeyFrame();
+		//			rotKF4.time = 0.0f;
+		//			rotKF4.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo2.rotationKeyFrames[0] = rotKF4;
 
-					RotationKeyFrame rotKF5 = RotationKeyFrame();
-					rotKF5.time = 60.0f;
-					rotKF5.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo2.rotationKeyFrames[1] = rotKF5;
+		//			RotationKeyFrame rotKF5 = RotationKeyFrame();
+		//			rotKF5.time = 60.0f;
+		//			rotKF5.value = glm::quat(0.9238795f, -0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo2.rotationKeyFrames[1] = rotKF5;
 
-					RotationKeyFrame rotKF6 = RotationKeyFrame();
-					rotKF6.time = 120.0f;
-					rotKF6.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
-					nodeAnimInfo2.rotationKeyFrames[2] = rotKF6;
+		//			RotationKeyFrame rotKF6 = RotationKeyFrame();
+		//			rotKF6.time = 120.0f;
+		//			rotKF6.value = glm::quat(0.9238795f, 0.3826834f, 0.0f, 0.0f);
+		//			nodeAnimInfo2.rotationKeyFrames[2] = rotKF6;
 
-					animInfo2.channels[nodeAnimInfo2.name] = nodeAnimInfo2;
+		//			animInfo2.channels[nodeAnimInfo2.name] = nodeAnimInfo2;
 
-					// LEFT LEG
-					NodeAnimationInfo nodeAnimInfo3 = NodeAnimationInfo();
-					nodeAnimInfo3.name = "mixamorig:LeftUpLeg";
+		//			// LEFT LEG
+		//			NodeAnimationInfo nodeAnimInfo3 = NodeAnimationInfo();
+		//			nodeAnimInfo3.name = "mixamorig:LeftUpLeg";
 
-					nodeAnimInfo3.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo3.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF7 = RotationKeyFrame();
-					rotKF7.time = 0.0f;
-					rotKF7.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
-					nodeAnimInfo3.rotationKeyFrames[0] = rotKF7;
+		//			RotationKeyFrame rotKF7 = RotationKeyFrame();
+		//			rotKF7.time = 0.0f;
+		//			rotKF7.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
+		//			nodeAnimInfo3.rotationKeyFrames[0] = rotKF7;
 
-					RotationKeyFrame rotKF8 = RotationKeyFrame();
-					rotKF8.time = 60.0f;
-					rotKF8.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.3826834f);
-					nodeAnimInfo3.rotationKeyFrames[1] = rotKF8;
+		//			RotationKeyFrame rotKF8 = RotationKeyFrame();
+		//			rotKF8.time = 60.0f;
+		//			rotKF8.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.3826834f);
+		//			nodeAnimInfo3.rotationKeyFrames[1] = rotKF8;
 
-					RotationKeyFrame rotKF9 = RotationKeyFrame();
-					rotKF9.time = 120.0f;
-					rotKF9.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
-					nodeAnimInfo3.rotationKeyFrames[2] = rotKF9;
+		//			RotationKeyFrame rotKF9 = RotationKeyFrame();
+		//			rotKF9.time = 120.0f;
+		//			rotKF9.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
+		//			nodeAnimInfo3.rotationKeyFrames[2] = rotKF9;
 
-					animInfo2.channels[nodeAnimInfo3.name] = nodeAnimInfo3;
+		//			animInfo2.channels[nodeAnimInfo3.name] = nodeAnimInfo3;
 
-					// RIGHT LEG
-					NodeAnimationInfo nodeAnimInfo4 = NodeAnimationInfo();
-					nodeAnimInfo4.name = "mixamorig:RightUpLeg";
+		//			// RIGHT LEG
+		//			NodeAnimationInfo nodeAnimInfo4 = NodeAnimationInfo();
+		//			nodeAnimInfo4.name = "mixamorig:RightUpLeg";
 
-					nodeAnimInfo4.rotationKeyFrames.resize(3);
+		//			nodeAnimInfo4.rotationKeyFrames.resize(3);
 
-					RotationKeyFrame rotKF10 = RotationKeyFrame();
-					rotKF10.time = 0.0f;
-					rotKF10.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
-					nodeAnimInfo4.rotationKeyFrames[0] = rotKF10;
+		//			RotationKeyFrame rotKF10 = RotationKeyFrame();
+		//			rotKF10.time = 0.0f;
+		//			rotKF10.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
+		//			nodeAnimInfo4.rotationKeyFrames[0] = rotKF10;
 
-					RotationKeyFrame rotKF11 = RotationKeyFrame();
-					rotKF11.time = 60.0f;
-					rotKF11.value = glm::quat(0.9238795f, 0.0f, 0.0f, -0.3826834f);
-					nodeAnimInfo4.rotationKeyFrames[1] = rotKF11;
+		//			RotationKeyFrame rotKF11 = RotationKeyFrame();
+		//			rotKF11.time = 60.0f;
+		//			rotKF11.value = glm::quat(0.9238795f, 0.0f, 0.0f, -0.3826834f);
+		//			nodeAnimInfo4.rotationKeyFrames[1] = rotKF11;
 
-					RotationKeyFrame rotKF12 = RotationKeyFrame();
-					rotKF12.time = 120.0f;
-					rotKF12.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
-					nodeAnimInfo4.rotationKeyFrames[2] = rotKF12;
+		//			RotationKeyFrame rotKF12 = RotationKeyFrame();
+		//			rotKF12.time = 120.0f;
+		//			rotKF12.value = glm::quat(0.9238795f, 0.0f, 0.0f, 0.0f);
+		//			nodeAnimInfo4.rotationKeyFrames[2] = rotKF12;
 
-					animInfo2.channels[nodeAnimInfo4.name] = nodeAnimInfo4;
-				}
-				animInfo2.timeLastFrame = 120.0f;
+		//			animInfo2.channels[nodeAnimInfo4.name] = nodeAnimInfo4;
+		//		}
+		//		animInfo2.timeLastFrame = 120.0f;
 
-				pMeshAnimations->animations[1] = animInfo2;
-			}
+		//		pMeshAnimations->animations[1] = animInfo2;
+		//	}
 
-			pModel->pMeshes[0]->pMeshAnimations = pMeshAnimations;
-		}
+		//	pModel->pMeshes[0]->pMeshAnimations = pMeshAnimations;
+		//}
 	}
 
 	void MeshAnimationSystem::Update(Scene* pScene, float deltaTime)
